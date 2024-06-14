@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PagesRoutingModule } from './pages-routing.module';
+import { AdsenseModule } from 'ng2-adsense';
 
 
 
@@ -11,7 +12,7 @@ import { PagesRoutingModule } from './pages-routing.module';
       CommonModule,
       RouterModule,
       PagesRoutingModule,
-      HomeComponent
+      HomeComponent,
     ],
     exports: [HomeComponent],
     declarations: [],

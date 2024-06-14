@@ -9,13 +9,14 @@ import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { PagesModule } from './pages/pages.modules';
 import {MatMenuModule} from '@angular/material/menu';
+import { AdsenseModule } from 'ng2-adsense';
 @NgModule({
 
   declarations: [],
   imports: [
     //BrowserModule,
    // BrowserAnimationsModule,
-    MatMenuModule,],
+    MatMenuModule],
   providers: [
   ],
   bootstrap: [],
