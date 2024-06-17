@@ -3,3 +3,11 @@
     height: 100%;
     padding-top: 50px;
 } */
+.rounded-circle {
+    border-radius: 50% !important;
+    text-align: center;
+}
+
+.avatar {
+    padding-top: 8vh
+}
