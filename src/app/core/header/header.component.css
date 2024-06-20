@@ -5,4 +5,14 @@
     color: white;
     text-align: left;
     padding-top: 11px;
+    float: left;
+}
+.site-header--brand{
+    color: white;
+    float: left;
+}
+
+.brand1{
+    color: white;
+    float: right;
 }
