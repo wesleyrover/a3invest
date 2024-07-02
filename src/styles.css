@@ -18,14 +18,14 @@
 
 .social-links li a {
     font-size: 20px;
-    color: #000;
+    color: white;
     padding: 10px;
     padding-bottom: 4px;
     transition: all .4s ease
 }
 
 .social-links li a:hover {
-    color: #000
+    color: rgb(255, 255, 255)
 }
 /* Seletor universal */
 * {
