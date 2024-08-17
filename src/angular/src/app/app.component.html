@@ -1,18 +1,13 @@
-<app-header></app-header>
-<!-- <div class="text-center">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3380691171417477" data-ad-slot="9975399151"
-        data-full-width-responsive="true"></ins>
+@if(loading$ | async) {
+<div class="spinner-container">
+	@if(customLoadingIndicator) {
+	<ng-container *ngTemplateOutlet="customLoadingIndicator" />
+	} @else {
+	<mat-spinner></mat-spinner>
+	}
 </div>
-my-content-->
-<div class="text-center">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3380691171417477" data-ad-slot="9975399151"
-        data-full-width-responsive="true"></ins>
-</div>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-3380691171417477"
-     data-ad-slot="9297234381"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+}
+<!-- <app-header></app-header> -->
+<router-outlet>
+</router-outlet>
+<!-- <app-footer></app-footer> -->

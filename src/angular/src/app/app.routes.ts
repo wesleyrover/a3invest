@@ -1,28 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './page/login/login.component';
 import { NgModule } from '@angular/core';
-import { Routes } from '@angular/router';
+import { AtivoComponent } from './page/ativo/ativo.component';
 
-import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
-import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import { PagesModule } from './pages/pages.modules';
-import {MatMenuModule} from '@angular/material/menu';
-import { AdsenseModule } from 'ng2-adsense';
+export const routes: Routes = [ 
+    { path: 'login', component: LoginComponent },
+    {path: 'ativo', component: AtivoComponent}];
+
+
 @NgModule({
-
-  declarations: [],
-  imports: [
-    //BrowserModule,
-   // BrowserAnimationsModule,
-    MatMenuModule],
-  providers: [
-  ],
-  bootstrap: [],
+    imports: [RouterModule.forRoot(routes, { useHash: true })],
+    exports: [RouterModule]
 })
-export class AppModule { }
+export class AppRoutingModule {
 
-// import { Routes } from '@angular/router';
+}
 
-// export const routes: Routes = [];
+// const appRoutes: Routes = [
+   
+//     // {
+//     //     path: '',
+//     //     redirectTo: '/home',
+//     //     pathMatch: 'full'
+//     // }
+// ];

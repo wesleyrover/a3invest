@@ -1,0 +1,52 @@
+<div class="fluid-container">
+    <section class="section section-top">
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-7">
+          <img class="align-center mt-4" src="assets/images/marca-siga.png" alt="Siga">
+        </div>
+        <div class="col-md-3">
+           <form class="form-signin mb-3" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <h3><img class="ico mb-2" src="assets/images/ico-cadeado-login.png" alt="Login">Login</h3>
+              <input type="input" placeholder="Usuário" formControlName="username" class="form-control mb-3 input-lg input-login " [ngClass]="aplicaCssErro('username')" >
+              <input type="input" placeholder="Senha" formControlName="password" class="form-control mb-3 input-lg input-login " [ngClass]="aplicaCssErro('password')" >
+            <button type="submit" class="btn btn-lg btn-primary btn-block input-login" [disabled]="!userForm.valid">Entrar</button>
+          </form> 
+          <!-- <p class="text-center mt-3 mb-3"><a href="#" class="link-btn">REGULARIZAR PERMISSÃO DE ACESSO</a></p> -->
+        </div>
+      </div>
+    </section>
+    <div class="headline"></div>
+    <section class="section">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+          <!-- <h3 class="mb-4"><img class="ico" src="assets/images/ico-acesso-sistema.png" alt="Acesso ao sistema">ACESSO
+            AO
+            SISTEMA</h3>
+          <p>
+            O acesso ao SIGA deve ser realizado atráves do login e senha de rede.
+            Qualquer alteração desta senha, automaticamente é refletida na autenticação do sistema.
+            Caso seja exibida a mensagem: "Acesso não permitido: Usuário não tem autorização para acessar o sistema."
+            acesse o link:<a class="link-text" routerLink="/regularizar"> Regularizar permissão de acesso.</a> Informe os dados solicitados no formulário e aguarde o
+            retorno.
+          </p> -->
+        </div>
+        <div class="col-md-3">
+          <!-- <h3 class="mb-4"><img class="ico" src="assets/images/ico-dados-pessoais.png" alt="Dados pessoais">DADOS
+            PESSOAIS</h3>
+          <p>
+            Verifique se suas informações estão atualizadas na área de Dados Pessoais: Menu SIGA > Dados Pessoais.
+          </p> -->
+        </div>
+        <div class="col-md-3">
+          <!-- <h3 class="mb-4"><img class="ico" src="assets/images/ico-aposentados.png" alt="Acesso de aposentados"></h3> -->
+          <p>
+            <!-- Servidores aposentados podem consultar documentos utilizando a senha de acesso do RHNet, clicando aqui. <a class="link-text" routerLink="/acesso-aposentado/login">aqui</a>. -->
+          </p>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+    </section>
+  </div>
+  

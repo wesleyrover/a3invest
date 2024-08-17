@@ -1,32 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { CoreModule } from './core/core.module';
-import { PagesModule } from './pages/pages.modules';
-import { AdsenseComponent } from 'ng2-adsense';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { RouteConfigLoadEnd, RouteConfigLoadStart, Router, RouterOutlet } from '@angular/router';
+import { LocalService } from './auth/localService';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Observable, tap } from 'rxjs';
+import { LoadingService } from './auth/localSpinnerService';
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CoreModule, PagesModule, CommonModule, RouterOutlet],
+  imports: [RouterOutlet, MatProgressSpinnerModule, MatProgressSpinnerModule, AsyncPipe, NgIf, NgTemplateOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  ngOnInit(): void {
-    setTimeout(() => {      
-      try {
-       
-        //console.error("ads", window.adsbygoogle);
-        //(window["adsbygoogle"] = window.adsbygoogle || []).push({});
-        //(window[0] = window[0] || [0]).push({});
-        //adding 2nd time as we add two ads in the Html
-        //(window[0] = window[0] || []).push({}); 
-      } catch (e) {
-        console.error("ads", e);
-      }
-    }, 900);
-  }
-  
+export class AppComponent {
   title = 'a3invest';
+  public spinnerShowing: boolean = false;
+
+  loading$: Observable<boolean>;
+
+  @Input()
+  detectRouteTransitions = false;
+
+  @ContentChild("loading")
+  customLoadingIndicator: TemplateRef<any> | null = null;
+
+  constructor(
+    private localStore: LocalService,
+  private loadingService: LoadingService, 
+  private router: Router) {
+    this.loading$ = this.loadingService.loading$;
+  }
+
+  ngOnInit() {
+    this.localStore.saveData('id', 'jk123');
+    if (this.detectRouteTransitions) {
+      this.router.events
+        .pipe(
+          tap((event) => {
+            if (event instanceof RouteConfigLoadStart) {
+              this.loadingService.loadingOn();
+            } else if (event instanceof RouteConfigLoadEnd) {
+              this.loadingService.loadingOff();
+            }
+          })
+        )
+        .subscribe();
+    }
+  }
 }
