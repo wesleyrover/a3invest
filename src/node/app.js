@@ -9,7 +9,7 @@ app.get("/", function (req, res) {
 // todo o url começado por "/api" chama as rotas em "./routes/api"
 const routes = require("./routes/api");
 app.use("/api", routes);
-const bodyParser = require("body - parser");
+const bodyParser = require("body-parser");
 app.use(bodyParser.json()); 
 let port = 5000;
 // servidor á escuta no porto 5000
