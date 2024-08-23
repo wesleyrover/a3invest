@@ -9,25 +9,25 @@ services:
       ME_CONFIG_MONGODB_PORT: 27017
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: MongoDB2019
-      ME_CONFIG_MONGODB_URL: "mongodb://root:MongoDB2019@my-mongo:27017"
+      ME_CONFIG_MONGODB_URL: "mongodb://root:MongoDB2019@mongo:27017"
     links:
       - mongo
-    # networks:
-    #  - mongocomposenetwork
+    networks:
+      - mongocomposenetwork
   mongo:
     image: mongo:latest
-    container_name: my-mongo
+    restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: MongoDB2019
       MONGO_INITDB_DATABASE: a3invest
     ports:
-      - "27017:27017"
+      - "127.0.0.1:27017:27017"
     volumes:
       - /data/mongo:/data/db
-    #networks:
-    #  - mongocomposenetwork
+    networks:
+      - mongocomposenetwork
 
-# networks: 
-#   mongocomposenetwork:
-#     driver: bridge
+networks: 
+  mongocomposenetwork:
+    driver: bridge
