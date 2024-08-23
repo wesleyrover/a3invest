@@ -18,3 +18,10 @@ exports.update = function (req, res) {
 exports.delete = function (req, res) {
     res.send({ type: "DELETE" });
 };
+exports.create = function (req, res) {
+    console.log("You made a POST request:", req.body);
+    res.send({
+     type: "POST",
+     name: req.body.operacao,
+     rank: req.body.taxa });
+  };
