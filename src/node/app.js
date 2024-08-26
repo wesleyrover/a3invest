@@ -2,6 +2,17 @@
 const express = require('express');
 // inicializar app express
 const app = express();
+const mongoose = require('mongoose');
+// Ligar á B.D.: 'test'->user da BD, ´nnn´->pass
+mongoose.connect('mongodb://root:MongoDB2019@localhost:27017');
+// Confirma ligação na consola
+mongoose.connection.on('connected', function () {
+  console.log('Connected to Database '+'test');
+});
+// Mensagem de Erro
+mongoose.connection.on('error', (err) => {
+  console.log('Database error '+err);
+});
 // "END POINT INVÁLIDO!"
 app.get("/", function (req, res) {
     res.send("END POINT INVÁLIDO!");
