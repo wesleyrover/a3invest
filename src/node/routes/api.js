@@ -7,8 +7,11 @@ const apiController = require("./../controllers/apiControllers");
 router.get("/teste", apiController.test);
 // TODO: listar pontos de interesse da BD
 router.get("/details",apiController.details);
-// TODO: adicionar novo ponto de interesse
-router.post("/taxa/add",apiController.create);
+// TODO: adicionar taxa
+router.post("/taxa/create",apiController.taxaCreate);
+router.put("/taxa/update/:id",apiController.taxaUpdate);
+// TODO: adicionar Movimentacao
+router.post('/movimentacao/create',apiController.movimentacaoCreate)
 // TODO: atualizar ponto de interesse
 router.put("/interest/:id",apiController.update);
 // TODO: apagar ponto de interesse
