@@ -77,7 +77,7 @@ exports.movimentacaoCreate = async function (req, res, next) {
     console.log("You made a POST request:", req.body);
     try {
         const a3invest = new movimentacao(req.body);
-
+        a3invest.valorTotal = (a3invest.cotas * a3invest.valorUnitario).toFixed(2);
         // Supondo que `stall` seja uma função assíncrona que retorna uma Promise
         await stall();
 
@@ -86,7 +86,7 @@ exports.movimentacaoCreate = async function (req, res, next) {
 
         // Envia uma única resposta JSON
         res.status(201).json({
-            msg: "Taxa criado com sucesso!",
+            msg: "Movimentacao criado com sucesso!",
             data: taxa
         });
     } catch (error) {

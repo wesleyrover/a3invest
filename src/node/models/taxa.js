@@ -12,6 +12,9 @@ const TAXASchema = new Schema({
   status: {
   type: Boolean,
   default: true
+  },
+  corretora:{
+    type: String
   }
 });
 // criar Modelo_PI baseado em PISchema: 'PontosInteresse'->nome da // coleção

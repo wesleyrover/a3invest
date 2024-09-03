@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // PI Schema
 const MovimentacaoSchema = new Schema({
-    operacao: { type: String },
+    taxa: { type: mongoose.ObjectId},
+    operacao: { type: String, enum: ['Compra', 'Venda', 'Dividendo'] },
     data: { type: Date },
     ativo: { type: String },	
     cotas: { type: Number },	
-    valorUnitário: { type: Number },
-    taxas: { type: Number },
-    valorOperacao: { type: Number },	
-    valortotal: { type: Number }
+    valorUnitario: { type: Number },
+    valorTotal: { type: Number }
 });
 
 const Movimentacao = mongoose.model('Movimentacao', MovimentacaoSchema);
