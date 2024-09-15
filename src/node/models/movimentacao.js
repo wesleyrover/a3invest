@@ -6,7 +6,8 @@ const MovimentacaoSchema = new Schema({
     operacao: { type: String, enum: ['Compra', 'Venda', 'Dividendo'] },
     data: { type: Date },
     ativo: { type: String },	
-    cotas: { type: Number },	
+    cotas: { type: Number },
+    taxas: { type: Number },
     valorUnitario: { type: Number },
     valorTotal: { type: Number }
 });

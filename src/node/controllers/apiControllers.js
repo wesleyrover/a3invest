@@ -1,6 +1,7 @@
 const Taxa = require('../models/taxa');
 const movimentacao = require('../models/movimentacao');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const Movimentacao = require('../models/movimentacao');
 // create application/json parser
 var jsonParser = bodyParser.json()
 exports.test = function (req, res) {
@@ -75,15 +76,47 @@ exports.taxaUpdate = async function (req, res, next) {
 
 exports.movimentacaoCreate = async function (req, res, next) {
     console.log("You made a POST request:", req.body);
+
     try {
-        const a3invest = new movimentacao(req.body);
+        const a3invest = new Movimentacao(req.body);
         a3invest.valorTotal = (a3invest.cotas * a3invest.valorUnitario).toFixed(2);
+        const taxaSoma = await Taxa.findById(a3invest.taxa);
+
+        // Certifique-se de criar o índice apenas uma vez e fora da operação de agregação
+        await Movimentacao.collection.createIndex({ taxa: "text" });
+
+        // Usando uma abordagem de busca com índice de texto, em vez de $search
+        const sumMov = await Movimentacao.aggregate([
+            {
+                $match: { taxa: a3invest.taxa } // Filtro para selecionar documentos com a taxa específica
+            },
+            {
+                $group: {
+                    _id: null,
+                    valorTotal: { $sum: '$valorTotal' }
+                }
+            }
+        ]).exec();
+        let valorSum = 0.0; 
+        if (sumMov.length !== 0) {
+            valorSum = sumMov[0].valorTotal + a3invest.valorTotal;
+            a3invest.taxas = ((a3invest.valorTotal / (sumMov[0].valorTotal + a3invest.valorTotal)) * taxaSoma.taxa);
+        } else {
+            valorSum = a3invest.valorTotal;
+            a3invest.taxas = ((a3invest.valorTotal / (a3invest.valorTotal)) * taxaSoma.taxa);
+        }
+
+        const movUpdate = await Movimentacao.find({ taxa: a3invest.taxa })
+      
         // Supondo que `stall` seja uma função assíncrona que retorna uma Promise
         await stall();
 
-        // Salva a nova instância de Taxa no banco de dados
+        // Salva a nova instância de Movimentacao no banco de dados
         const taxa = await a3invest.save();
-
+        movUpdate.forEach(async (doc) => {
+            doc.taxas = ((doc.valorTotal / valorSum) * taxaSoma.taxa);
+            doc.save()
+        });
         // Envia uma única resposta JSON
         res.status(201).json({
             msg: "Movimentacao criado com sucesso!",
